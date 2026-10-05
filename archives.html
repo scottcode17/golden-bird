@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The First Website</title>
+</head>
+<body style="background-color: darkgreen; color: darkred; text-align: center;">
+    <h1>High Scores</h1>
+    <ol id="scoreList" style="display: inline-block; text-align: left;"></ol>
+    <script>
+        const scoreList = document.getElementById("scoreList");
+        const scores = JSON.parse(localStorage.getItem("birdScores") || "[]");
+        
+        if (scores.length === 0) {
+            scoreList.innerHTML = "<li>No scores yet.</li>";
+        } else {
+            scoreList.innerHTML = scores.map((entry, index) =>
+        `<li>${index + 1}. ${entry.name} — ${entry.score}</li>`
+            ).join("");
+        }
+    </script>
+</body>
