@@ -92,7 +92,7 @@ pointer-events: none;">
 style="display: none;"
 onclick="revertcursor()">
     Revert cursor
-</button>
+</button><br>
 <script>
     function revertcursor() {
         document.body.style.cursor = "auto";
@@ -130,6 +130,8 @@ Agathan Mouse Bird
         const gameArea = document.getElementById("gameArea");
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
+        const birdImage = new Image();
+        birdImage.src = "Agathanmousebird.png";
         let running = false;
         let bird = { x: 120, y: 180, radius: 18, velocityY: 0 };
         let pipes = [];
@@ -251,15 +253,17 @@ Agathan Mouse Bird
         }
 
         function drawbird() {
-            ctx.fillStyle = "#ffcc00";
-            ctx.beginPath();
-            ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
-            ctx.fill();
+            const size = 77;
 
-            ctx.fillStyle = "#000";
-            ctx.beginPath();
-            ctx.arc(bird.x + 6, bird.y - 4, 3, 0, Math.PI * 2);
-            ctx.fill();
+            if (birdImage.complete && birdImage.naturalWidth > 0) {
+                ctx.drawImage(
+                    birdImage,
+                    bird.x - size / 2,
+                    bird.y - size / 2,
+                    size, size
+                );
+                return;
+         }
         }
 
         function drawPipes() {
